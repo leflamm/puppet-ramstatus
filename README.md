@@ -1,7 +1,10 @@
 # puppet-ramstatus
 
-## sketch
-- set env vars: SIZE=100M, STATE_DIR=/var/lib/puppet/state, TRY_LAZY=true
-- wrapper init script
- - start': mount+start
- - stop': stop+umount
+## Purpose
+Can boost Puppet agent performance significantly, especially if used on a system with slower disk IO and large catalogs with many resources. Seen run time savings > 40%.
+
+## What it does
+Wraps original Puppet agent init script. Mount (and unmounts) a ramdisk to Puppet's ```status``` directory defaulting to ```/var/lib/puppet/status```
+
+## Usage
+Like a normal init script.
