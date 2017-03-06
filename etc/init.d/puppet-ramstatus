@@ -15,17 +15,17 @@
 
 ### END INIT INFO                                                                                                                                          
 SIZE=100M
-STATE_DIR=/var/lib/puppet/status
+STATE_DIR=/var/lib/puppet/state
 TRY_LAZY_UNMOUNT=false
 
 function do_mount() {
-	mount -o size=${SIZE} -t tmpfs none ${STATE_DIR}
+	(cd / && mount -o size=${SIZE} -t tmpfs none ${STATE_DIR})
 }
 
 function do_umount() {
 	OPTS=""
 	${TRY_LAZY_UNMOUNT} && OPTS=" --lazy"
-	( cd && umount ${STATE_DIR} ${OPTS})
+	(cd / && umount ${STATE_DIR} ${OPTS})
 }
 
 function mount_status() {
