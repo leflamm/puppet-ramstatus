@@ -2,16 +2,11 @@
 # puppet-ramdisk	Init script for running the puppet client daemon
 #
 # Author:		Christian Flamm <christian.flamm@mercateo.com>
-# description:  	Starts original puppet agent service but mounts a ram disk to puppet's status directory
-
-
-#! /bin/sh
-### BEGIN INIT INFO
-# Provides:          puppet
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: puppet agent ramstatus
-
+# Description:  	Starts original puppet agent service but mounts a ram disk to puppet's status directory
+# Short-Description: 	puppet agent ramstatus
+# Provides:		puppet
+# Default-Start:     	2 3 4 5
+# Default-Stop:      	0 1 6
 
 ### END INIT INFO                                                                                                                                          
 SIZE=100M
