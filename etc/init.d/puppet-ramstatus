@@ -1,20 +1,28 @@
+#!/bin/bash
+# puppet-ramdisk	Init script for running the puppet client daemon
+#
+# Author:		Christian Flamm <christian.flamm@mercateo.com>
+# description:  	Starts original puppet agent service but mounts a ram disk to puppet's status directory
+
+
 #! /bin/sh
 ### BEGIN INIT INFO
 # Provides:          puppet
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: puppet agent ramstatus
-# Description:       Starts original puppet agent service but mounts a ram disk to puppet's status directory
+
+
 ### END INIT INFO                                                                                                                                          
 SIZE=100M
 STATE_DIR=/var/lib/puppet/status
 TRY_LAZY_UNMOUNT=false
 
-function mount() {
+function do_mount() {
 	mount -o size=${SIZE} -t tmpfs none ${STATE_DIR}
 }
 
-function umount() {
+function do_umount() {
 	OPTS=""
 	${TRY_LAZY_UNMOUNT} && OPTS=" --lazy"
 	( cd && umount ${STATE_DIR} ${OPTS})
@@ -25,15 +33,15 @@ function mount_status() {
 }
 
 function do_start() {
-	umount
-	mount
+	do_umount
+	do_mount
 	mount_status
 	service puppet start
 }
 
 function do_stop() {
 	service puppet stop
-	umount
+	do_umount
 	mount_status
 }
 
