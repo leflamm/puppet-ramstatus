@@ -69,7 +69,7 @@ case "$1" in
 	do_status
 	;;
     restart|force-reload)
-	do_reload
+	do_start
 	;;
   *)
 	echo "Usage: $0 {start|stop|status|restart|force-reload|reload}" >&2
